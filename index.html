@@ -101,11 +101,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        1
+        2
         <span>文章</span>
       </div>
       <div class="article-info-block">
-        0
+        2
         <span>标签</span>
       </div>
     </div>
@@ -130,7 +130,7 @@
 
       
       <section id="main">
-      <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <article id="post-Android大体结构理解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -139,7 +139,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/12/13/hello-world/">Hello World</a>
+      <a class="article-title" href="/2016/01/07/Android大体结构理解/">Android大体结构理解</a>
     </h1>
   
 
@@ -147,37 +147,113 @@
           
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2015/12/13/hello-world/">
-      <time datetime="2015-12-12T20:33:31.000Z" itemprop="datePublished">2015-12-13</time>
+    <a href="/2016/01/07/Android大体结构理解/">
+      <time datetime="2016-01-07T08:39:26.000Z" itemprop="datePublished">2016-01-07</time>
     </a>
   </div>
 
 
           
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/学习/">学习</a>
+  </div>
+
         </div>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
                 
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start"><a href="#Quick_Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create_a_new_post"><a href="#Create_a_new_post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server"><a href="#Run_server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files"><a href="#Generate_static_files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites"><a href="#Deploy_to_remote_sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <blockquote>
+<p>题记：<br>要知道，既然要学一样东西，那么你就得了解它的大致工作状态，虽然不要求说你可以很清晰的描绘出它的结构，工作原理，但是大概的了解是很有必要的。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>先看图：<br><img src="/source/image/android_layer.png" alt="Layer" title="Layer"></p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Linux设备驱动层：<br>在Android中，对硬件的驱动分为两层，也就是用户空间（User Space）和内核空间（Kernel Space）。Linux内核驱动放在内核空间中，HAL层放在用户空间。为什么要分成两层呢？其实是为了厂家的利益，要知道Linux是开源的，协议是GNU License，在产品发布时，放在Linux下的源码是要公布出去的，而Android 是 Apache License开源协议，发布产品无需发布源代码，所以内核驱动层只提供简单的访问硬件逻辑，例如读写硬件寄存器的通道，至于从硬件中读到了什么值或者写了什么值到硬件中的逻辑，都放在硬件抽象层中去了。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>HAL层：<br>意思是Hardware Abstract Layer，直译过来就是硬件抽象层，从字面上理解大概他就是硬件虚拟接口，我们百度一下可以看得到它的解释是：</p>
+<p>硬件抽象层是位于操作系统 内核与硬件电路之间的接口层，其目的在于将硬件抽象化。它隐藏了特定平台的硬件接口细节,为           操作系统提供虚拟硬件平台,使其具有硬件无关性,可在多种平台上进行移植。 从软硬件测试的角度来看，软硬件的测试工作都可&gt; 分别基于硬件抽象层来完成，使得软硬件测试工作的并行进行成为可能。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Libraries &amp; Runtime<br>这层是建立Java的运行环境和封装一些C、C++的程序库。<br>这层有Dalvik虚拟机，其依赖于Linux 内核提供基本功能，如线程和底层内存管理，每一个Android应用程序是Dalvik虚拟机中的实例，运行在他们自己的进程中。Dalvik虚拟机设计成，在一个设备可以高效地运行多个虚拟机。Dalvik虚拟机可执行文件格式是.dex，dex格式是专为Dalvik设计的一种压缩格式，适合内存和处理器速度有限的系统</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>Application Framework<br>这层是最常接触到的一层，提供四大组件和一些服务、插件给我们使用，这层是纯java编写。所有应用程序都在这层实现，从一个Activity的启动到管理它的生命周期，View视图等.</p>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://czmc.github.io/2015/12/13/hello-world/" data-id="cii4a8r860000shttdgywqfki" class="article-share-link">分享到</a>
+      <a data-url="https://czmc.github.io/2016/01/07/Android大体结构理解/" data-id="cij400b7p000049ttbdrwru04" class="article-share-link">分享到</a>
       
-        <a href="https://czmc.github.io/2015/12/13/hello-world/#ds-thread" class="article-comment-link">评论</a>
+        <a href="https://czmc.github.io/2016/01/07/Android大体结构理解/#ds-thread" class="article-comment-link">评论</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/理解/">理解</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+ 
+    
+      <article id="post-我的第一篇博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/07/我的第一篇博客/">我的第一篇博客</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/01/07/我的第一篇博客/">
+      <time datetime="2016-01-07T07:14:14.000Z" itemprop="datePublished">2016-01-07</time>
+    </a>
+  </div>
+
+
+          
+  <div class="article-category">
+  	<i class="fa fa-folder"></i>
+    <a class="article-category-link" href="/categories/见闻/">见闻</a>
+  </div>
+
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+                
+        <p>最近，开始加强学习，为了寻找更好的学习方法，百度了一下，发现写博客总结自己的所学非常有帮助，所以，为了更好的总结所掌握的东西，我决定开始不定期的更新我的博客，另外，我也很乐意去分享一些我的见闻给需要的人。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://czmc.github.io/2016/01/07/我的第一篇博客/" data-id="cij400bb0000j49ttc4cgi5jh" class="article-share-link">分享到</a>
+      
+        <a href="https://czmc.github.io/2016/01/07/我的第一篇博客/#ds-thread" class="article-comment-link">评论</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/其他/">其他</a></li></ul>
+
     </footer>
   </div>
   
@@ -197,7 +273,25 @@
           <li>
             
             <div class="item-thumbnail">
-              <a href="/2015/12/13/hello-world/" class="thumbnail">
+              <a href="/2016/01/07/Android大体结构理解/" class="thumbnail">
+  
+    <span style="background-image:url(/source/image/android_layer.png
+)" alt="Android大体结构理解" class="thumbnail-image"></span>
+  
+</a>
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/学习/">学习</a></p>
+              <p class="item-title"><a href="/2016/01/07/Android大体结构理解/" class="title">Android大体结构理解</a></p>
+              <p class="item-date"><time datetime="2016-01-07T08:39:26.000Z" itemprop="datePublished">2016-01-07</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2016/01/07/我的第一篇博客/" class="thumbnail">
   
     <span class="thumbnail-image thumbnail-none"></span>
   
@@ -205,9 +299,9 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2015/12/13/hello-world/" class="title">Hello World</a></p>
-              <p class="item-date"><time datetime="2015-12-12T20:33:31.000Z" itemprop="datePublished">2015-12-13</time></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/见闻/">见闻</a></p>
+              <p class="item-title"><a href="/2016/01/07/我的第一篇博客/" class="title">我的第一篇博客</a></p>
+              <p class="item-date"><time datetime="2016-01-07T07:14:14.000Z" itemprop="datePublished">2016-01-07</time></p>
             </div>
           </li>
         
@@ -217,16 +311,37 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/学习/">学习</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/见闻/">见闻</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/其他/">其他</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理解/">理解</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/其他/" style="font-size: 10px;">其他</a> <a href="/tags/理解/" style="font-size: 10px;">理解</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -239,7 +354,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 czmc<br>
+      &copy; 2015 - 2016 czmc<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
     </div>
   </div>
