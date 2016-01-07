@@ -5,41 +5,17 @@
   
   <title>Android大体结构理解 | czmc的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题记：要知道，既然要学一样东西，那么你就得了解它的大致工作状态，虽然不要求说你可以很清晰的描绘出它的结构，工作原理，但是大概的了解是很有必要的。
-
-
-
-先看图：
-
-
-
-Linux设备驱动层：在Android中，对硬件的驱动分为两层，也就是用户空间（User Space）和内核空间（Kernel Space）。Linux内核驱动放在内核空间中，HAL层放在用户空间。为什么要分成两层呢？其实是为了厂家">
+  <meta name="description" content="题记：要知道，既然要学一样东西，那么你就得了解它的大致工作状态，虽然不要求说你可以很清晰的描绘出它的结构，工作原理，但是大概的了解是很有必要的。先看图：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android大体结构理解">
 <meta property="og:url" content="https://czmc.github.io/2016/01/07/Android大体结构理解/index.html">
 <meta property="og:site_name" content="czmc的博客">
-<meta property="og:description" content="题记：要知道，既然要学一样东西，那么你就得了解它的大致工作状态，虽然不要求说你可以很清晰的描绘出它的结构，工作原理，但是大概的了解是很有必要的。
-
-
-
-先看图：
-
-
-
-Linux设备驱动层：在Android中，对硬件的驱动分为两层，也就是用户空间（User Space）和内核空间（Kernel Space）。Linux内核驱动放在内核空间中，HAL层放在用户空间。为什么要分成两层呢？其实是为了厂家">
-<meta property="og:image" content="https://czmc.github.io/source/image/android_layer.png">
-<meta property="og:updated_time" content="2016-01-07T08:39:26.000Z">
+<meta property="og:description" content="题记：要知道，既然要学一样东西，那么你就得了解它的大致工作状态，虽然不要求说你可以很清晰的描绘出它的结构，工作原理，但是大概的了解是很有必要的。先看图：">
+<meta property="og:image" content="https://czmc.github.io/image/android_layer.png">
+<meta property="og:updated_time" content="2016-01-07T08:50:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android大体结构理解">
-<meta name="twitter:description" content="题记：要知道，既然要学一样东西，那么你就得了解它的大致工作状态，虽然不要求说你可以很清晰的描绘出它的结构，工作原理，但是大概的了解是很有必要的。
-
-
-
-先看图：
-
-
-
-Linux设备驱动层：在Android中，对硬件的驱动分为两层，也就是用户空间（User Space）和内核空间（Kernel Space）。Linux内核驱动放在内核空间中，HAL层放在用户空间。为什么要分成两层呢？其实是为了厂家">
+<meta name="twitter:description" content="题记：要知道，既然要学一样东西，那么你就得了解它的大致工作状态，虽然不要求说你可以很清晰的描绘出它的结构，工作原理，但是大概的了解是很有必要的。先看图：">
   
   
     <link rel="icon" href="favicon.png">
@@ -173,7 +149,7 @@ Linux设备驱动层：在Android中，对硬件的驱动分为两层，也就�
   <div class="article-date">
     <i class="fa fa-calendar"></i>
     <a href="/2016/01/07/Android大体结构理解/">
-      <time datetime="2016-01-07T08:39:26.000Z" itemprop="datePublished">2016-01-07</time>
+      <time datetime="2016-01-07T08:50:11.000Z" itemprop="datePublished">2016-01-07</time>
     </a>
   </div>
 
@@ -191,13 +167,10 @@ Linux设备驱动层：在Android中，对硬件的驱动分为两层，也就�
       
                 
         <blockquote>
-<p>题记：<br>要知道，既然要学一样东西，那么你就得了解它的大致工作状态，虽然不要求说你可以很清晰的描绘出它的结构，工作原理，但是大概的了解是很有必要的。</p>
+<p>题记：<br>要知道，既然要学一样东西，那么你就得了解它的大致工作状态，虽然不要求说你可以很清晰的描绘出它的结构，工作原理，但是大概的了解是很有必要的。<br>先看图：<br><img src="/image/android_layer.png" alt="Layer" title="Layer"></p>
 </blockquote>
 <hr>
-<blockquote>
-<p>先看图：<br><img src="/source/image/android_layer.png" alt="Layer" title="Layer"></p>
-</blockquote>
-<hr>
+<a id="more"></a>
 <blockquote>
 <p>Linux设备驱动层：<br>在Android中，对硬件的驱动分为两层，也就是用户空间（User Space）和内核空间（Kernel Space）。Linux内核驱动放在内核空间中，HAL层放在用户空间。为什么要分成两层呢？其实是为了厂家的利益，要知道Linux是开源的，协议是GNU License，在产品发布时，放在Linux下的源码是要公布出去的，而Android 是 Apache License开源协议，发布产品无需发布源代码，所以内核驱动层只提供简单的访问硬件逻辑，例如读写硬件寄存器的通道，至于从硬件中读到了什么值或者写了什么值到硬件中的逻辑，都放在硬件抽象层中去了。</p>
 </blockquote>
@@ -218,7 +191,7 @@ Linux设备驱动层：在Android中，对硬件的驱动分为两层，也就�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://czmc.github.io/2016/01/07/Android大体结构理解/" data-id="cij400b7p000049ttbdrwru04" class="article-share-link">分享到</a>
+      <a data-url="https://czmc.github.io/2016/01/07/Android大体结构理解/" data-id="cij40mh9a00005xttoaeos8qx" class="article-share-link">分享到</a>
       
         <a href="https://czmc.github.io/2016/01/07/Android大体结构理解/#ds-thread" class="article-comment-link">评论</a>
       
@@ -277,7 +250,7 @@ Linux设备驱动层：在Android中，对硬件的驱动分为两层，也就�
             <div class="item-thumbnail">
               <a href="/2016/01/07/Android大体结构理解/" class="thumbnail">
   
-    <span style="background-image:url(/source/image/android_layer.png
+    <span style="background-image:url(/image/android_layer.png
 )" alt="Android大体结构理解" class="thumbnail-image"></span>
   
 </a>
@@ -286,7 +259,7 @@ Linux设备驱动层：在Android中，对硬件的驱动分为两层，也就�
             <div class="item-inner">
               <p class="item-category"><a class="article-category-link" href="/categories/学习/">学习</a></p>
               <p class="item-title"><a href="/2016/01/07/Android大体结构理解/" class="title">Android大体结构理解</a></p>
-              <p class="item-date"><time datetime="2016-01-07T08:39:26.000Z" itemprop="datePublished">2016-01-07</time></p>
+              <p class="item-date"><time datetime="2016-01-07T08:50:11.000Z" itemprop="datePublished">2016-01-07</time></p>
             </div>
           </li>
         
